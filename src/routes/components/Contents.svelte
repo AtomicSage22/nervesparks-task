@@ -10,7 +10,7 @@
     let selected;
 </script>
 
-<main class= " relative bg-[] w-[85%] h-screen flex gap-[6rem] p-8 flex-wrap">
+<main class= " pl-[15%] relative bg-[] w-[100%] h-screen flex gap-[6rem] p-8 flex-wrap">
     {#if company !== undefined}
         {#each company.models as model}
             <ContentCards {model} {currentCompany} {selected}/>

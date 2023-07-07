@@ -57,5 +57,5 @@
           <button type="button" on:click={()=>{f.close()}}>Cancel</button>
         </form>
     </dialog>
-    <img on:click={()=>{f.showModal()}} src={addCards} alt="" class= "absolute h-[4rem] right-[3rem] bottom-[3rem]">
+    <img on:click={()=>{f.showModal()}} src={addCards} alt="" class= "absolute h-[3rem] right-[3rem] bottom-[3rem] hover:cursor-pointer">
 </main>

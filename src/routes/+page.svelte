@@ -1,6 +1,8 @@
 <script>
     import SideBar from "./components/SideBar.svelte";
     import Contents from "./components/Contents.svelte";
+    import Hamburger from "./components/Hamburger.svelte";
+
     import altroz from "../assets/cars/tata-altroz.webp";
     import harrier from "../assets/cars/tata-harrier.webp";
     import nexon from "../assets/cars/tata-nexon.webp";
@@ -161,8 +163,10 @@
             modelDetails: {}}]
             d.close();
     }
+    let open = false;
 </script>
 <section class="flex h-screen w-screen">
-    <SideBar companies = {companies} {updateMain} />
+    <SideBar companies = {companies} {updateMain} bind:open/>
+    <Hamburger bind:open={open}/>
     <Contents company = {currentCompany} {updateContents}/>
 </section>
