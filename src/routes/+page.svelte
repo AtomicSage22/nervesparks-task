@@ -6,7 +6,7 @@
     import nexon from "../assets/cars/tata-nexon.webp";
     import safari from "../assets/cars/tata-safari.webp";
     import tiago from "../assets/cars/tata-tiago.webp";
-    const companies = [
+    let companies = [
         {companyName: "Tata Motors Ltd",
         models: [
             {
@@ -156,9 +156,10 @@
     }
     const updateContents = (name, image) =>{
         currentCompany.models = [...currentCompany?.models,{
-            modelName: name,
-            modelImage: image,
+            modelName: name.value,
+            modelImage: URL.createObjectURL(image.files[0]),
             modelDetails: {}}]
+            d.close();
     }
 </script>
 <section class="flex h-screen w-screen">
