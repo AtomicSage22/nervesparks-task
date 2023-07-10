@@ -1,44 +1,18 @@
 <script>
     import addCards from "../../assets/icons/add.png"
     import ModelCards from "../components/ModelCards.svelte";
+    import { currentDetails } from "../../stores/currentDetails";
 
     let featureName;
     let featureProperty
-
-    let modelDetails = [
-        {
-            name: "Price",
-            value: "Rs.6.60 Lakh"
-        },
-        {
-            name: "Mileage",
-            value: "23.64 kmpl"
-        },
-        {
-            name: "Engine",
-            value: "1199 to 1497 cc"
-        },
-        {
-            name: "Safety",
-            value: "5 Star (Global NCAP)"
-        },
-        {
-            name: "Fuel Type",
-            value: "Petrol, CNG & Diesel"
-        },
-        {
-            name: "Transmission",
-            value: "Manual & Automatic"
-        },
-        {
-            name: "Seating Capacity",
-            value: "5 Seater"
-        },
-    ]
+    let currentModel;
+    currentDetails.subscribe((value) => {
+        currentModel = value.currentModel;
+    });
 </script>
 
 <main class= "relative h-screen w-screen bg-[#F7F8FC] flex flex-wrap gap-4 p-[3rem]">
-    {#each modelDetails as modelDetail}
+    {#each currentModel.modelDetails as modelDetail}
         <ModelCards {modelDetail}/>
     {/each}
     <dialog id="f">
@@ -50,8 +24,7 @@
             
 
           <button type="submit" on:click={()=>{
-            modelDetails = [...modelDetails, {name: featureName.value,
-            value: featureProperty.value}];
+            currentDetails.update((prev) => ({ ...prev, currentModel: {...prev.currentModel, modelDetails: [...prev.currentModel.modelDetails, {name: featureName.value, value: featureProperty.value}]} }));
             f.close();
           }}>Submit</button>
           <button type="button" on:click={()=>{f.close()}}>Cancel</button>

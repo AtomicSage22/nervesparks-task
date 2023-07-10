@@ -39,7 +39,8 @@ export const data1 = writable([
 						value: 'Manual & Automatic'
 					},
 					{
-						name: '5 Seater'
+						name: 'Capacity',
+						value: '5 Seater'
 					}
 				]
 			},

@@ -2,18 +2,21 @@
     import ContentCards from "./ContentCards.svelte";
     import addButton from "../../assets/icons/add.png";
     import expandButton from "../../assets/icons/expand.png";
-    export let company;
+    import { currentDetails } from "../../stores/currentDetails";
+    let company;
+    currentDetails.subscribe((value) => {
+        company = value.currentCompany;
+    });
     export let currentCompany;
     export let updateContents;
     let input;
     let imageInput;
-    let selected;
 </script>
 
 <main class= " pl-[15%] relative bg-[] w-[100%] h-screen flex gap-[6rem] p-8 flex-wrap">
-    {#if company !== undefined}
+    {#if company !== null}
         {#each company.models as model}
-            <ContentCards {model} {currentCompany} {selected}/>
+            <ContentCards {model}/>
         {/each}
     {/if}
     <dialog id="d">
