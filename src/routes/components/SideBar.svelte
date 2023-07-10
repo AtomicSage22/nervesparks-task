@@ -27,6 +27,7 @@
             <button type="submit" on:click={()=>{
               data1.update((prev) => [ ...prev, {companyName: companyName.value,
               models: []}]);
+
               c.close();
             }}>Submit</button>
             <button type="button" on:click={()=>{c.close()}}>Cancel</button>

@@ -3,12 +3,11 @@
     import addButton from "../../assets/icons/add.png";
     import expandButton from "../../assets/icons/expand.png";
     import { currentDetails } from "../../stores/currentDetails";
+    import { data1 } from "../../stores/data1";
     let company;
     currentDetails.subscribe((value) => {
         company = value.currentCompany;
     });
-    export let currentCompany;
-    export let updateContents;
     let input;
     let imageInput;
 </script>
@@ -28,7 +27,8 @@
           <input type="file" id="modalImage" name="modalImage" bind:this = {imageInput} accept="image/*" required><br><br>
           
           <button type="submit" on:click={()=>{
-            updateContents(input, imageInput)
+            currentDetails.update((prev) => ({ ...prev, currentCompany: {...prev.currentCompany, models: [...prev.currentCompany.models, {modelName: input.value, modelImage: URL.createObjectURL(imageInput.files[0]), modelDetails: []}]} }));
+            d.close();
           }}>Submit</button>
           <button type="button" on:click={()=>{d.close()}}>Cancel</button>
         </form>
