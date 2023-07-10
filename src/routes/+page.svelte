@@ -1,32 +1,172 @@
 <script>
-	import SideBar from './components/SideBar.svelte';
-	import Contents from './components/Contents.svelte';
-	import Hamburger from './components/Hamburger.svelte';
-	import { data1 } from '../stores/data1';
+    import SideBar from "./components/SideBar.svelte";
+    import Contents from "./components/Contents.svelte";
+    import Hamburger from "./components/Hamburger.svelte";
 
-	let currentCompany;
-	let companies;
+    import altroz from "../assets/cars/tata-altroz.webp";
+    import harrier from "../assets/cars/tata-harrier.webp";
+    import nexon from "../assets/cars/tata-nexon.webp";
+    import safari from "../assets/cars/tata-safari.webp";
+    import tiago from "../assets/cars/tata-tiago.webp";
+    let companies = [
+        {companyName: "Tata Motors Ltd",
+        models: [
+            {
+                modelName: "Tata Altroz",
+                modelImage: altroz,
+                modelDetails: {}
+            },
+            {
+                modelName: "Tata Harrier",
+                modelImage: harrier,
+                modelDetails: {}
+            },
+            {
+                modelName: "Tata Nexon",
+                modelImage: nexon,
+                modelDetails: {}
+            },
+            {
+                modelName: "Tata Safari",
+                modelImage: safari,
+                modelDetails: {}
+            },
+            {
+                modelName: "Tata Tiago",
+                modelImage: tiago,
+                modelDetails: {}
+            }
+            ]},
+        {companyName: "Maruti Suzuki India Ltd",
+        models: [
+            {
+                modelName: "",
+                modelImage: "",
+                modelDetails: {}
+            },
+            {
+                modelName: "",
+                modelImage: "",
+                modelDetails: {}
+            },
+            {
+                modelName: "",
+                modelImage: "",
+                modelDetails: {}
+            },
+            {
+                modelName: "",
+                modelImage: "",
+                modelDetails: {}
+            },
+            {
+                modelName: "",
+                modelImage: "",
+                modelDetails: {}
+            }
+        ]},
+        {companyName: "Mahindra and Mahindra Ltd",
+        models: [
+            {
+                modelName: "",
+                modelImage: "",
+                modelDetails: {}
+            },
+            {
+                modelName: "",
+                modelImage: "",
+                modelDetails: {}
+            },
+            {
+                modelName: "",
+                modelImage: "",
+                modelDetails: {}
+            },
+            {
+                modelName: "",
+                modelImage: "",
+                modelDetails: {}
+            },
+            {
+                modelName: "",
+                modelImage: "",
+                modelDetails: {}
+            }
+        ]},
+        {companyName: "Bajaj Auto Ltd",
+        models: [
+            {
+                modelName: "",
+                modelImage: "",
+                modelDetails: {}
+            },
+            {
+                modelName: "",
+                modelImage: "",
+                modelDetails: {}
+            },
+            {
+                modelName: "",
+                modelImage: "",
+                modelDetails: {}
+            },
+            {
+                modelName: "",
+                modelImage: "",
+                modelDetails: {}
+            },
+            {
+                modelName: "",
+                modelImage: "",
+                modelDetails: {}
+            }
+        ]},
+        {companyName: "TVS Motor Company Ltd",
+        models: [
+            {
+                modelName: "",
+                modelImage: "",
+                modelDetails: {}
+            },
+            {
+                modelName: "",
+                modelImage: "",
+                modelDetails: {}
+            },
+            {
+                modelName: "",
+                modelImage: "",
+                modelDetails: {}
+            },
+            {
+                modelName: "",
+                modelImage: "",
+                modelDetails: {}
+            },
+            {
+                modelName: "",
+                modelImage: "",
+                modelDetails: {}
+            }
+        ]},
+    ]
 
-	data1.subscribe((value) => {
-		companies = value;
-	});
+    let currentCompany;
 
-	const updateContents = (name, image) => {
-		currentCompany.models = [
-			...currentCompany?.models,
-			{
-				modelName: name.value,
-				modelImage: URL.createObjectURL(image.files[0]),
-				modelDetails: {}
-			}
-		];
-		d.close();
-	};
-	let open = false;
+    const updateMain = (company) =>{
+        currentCompany = company;
+    }
+    const updateContents = (name, image) =>{
+        currentCompany.models = [...currentCompany?.models,{
+            modelName: name.value,
+            modelImage: URL.createObjectURL(image.files[0]),
+            modelDetails: {}}]
+            d.close();
+    }
+    let open = false;
 </script>
-
 <section class="flex h-screen w-screen">
-	<SideBar bind:open />
-	<Hamburger bind:open />
-	<Contents  />
+    <SideBar companies = {companies} {updateMain} bind:open/>
+    <Hamburger bind:open={open}/>
+    <Contents company = {currentCompany} {updateContents}/>
 </section>
